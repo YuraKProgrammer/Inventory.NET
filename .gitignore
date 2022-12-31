@@ -1,0 +1,5 @@
+/.vs
+/Inventory.Models/bin
+/Inventory.Models/obj
+/Inventory.DesktopClient/obj
+/Inventory.DesktopClient/bin
