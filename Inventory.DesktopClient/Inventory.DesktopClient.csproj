@@ -10,15 +10,18 @@
   <ItemGroup>
     <None Remove="images\empty.png" />
     <None Remove="images\planks.png" />
+    <None Remove="images\stick.png" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Inventory.Models\Inventory.Models.csproj" />
+    <ProjectReference Include="..\Inventory.RecipesStorage\Inventory.RecipesStorage.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="images\empty.png" />
     <Resource Include="images\planks.png" />
+    <Resource Include="images\stick.png" />
   </ItemGroup>
 
 </Project>

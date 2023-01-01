@@ -32,10 +32,12 @@ namespace Inventory.Models
             cells[x, y] = new Cell(ig);
         }
 
-        public void RemoveItems(int x, int y)
+        public ItemsGroup RemoveItems(int x, int y)
         {
+            var c = cells[x, y].ItemsGroup;
             cells[x, y].ItemsGroup.Count = 0;
             cells[x, y].ItemsGroup.Item = null;
+            return c;
         }
     }
 }

@@ -7,7 +7,29 @@
         mc:Ignorable="d"
         Title="Инвентарь" Height="800" Width="1600">
     <Grid>
-        <Canvas x:Name="_inventory"/>
-        <Canvas x:Name="_craftingTable"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Column="0" Grid.Row="0">
+            <Menu Grid.Column="0">
+                <MenuItem Header="Редактор рецептов" FontSize="20"/>
+                <MenuItem Header="Выдать предмет" FontSize="20">
+                    <MenuItem Header="Доски"/>
+                    <MenuItem Header="Палка"/>
+                </MenuItem>
+                <MenuItem Header="Выйти" FontSize="20"/>
+            </Menu>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="1">
+            <Canvas x:Name="_inventory" Grid.Column="0"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <Canvas x:Name="_craftingTable" Grid.Column="1"/>
+        </StackPanel>
     </Grid>
 </Window>
