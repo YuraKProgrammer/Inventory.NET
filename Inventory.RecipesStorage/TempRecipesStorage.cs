@@ -10,8 +10,9 @@ namespace Inventory.RecipesStorage
 {
     public class TempRecipesStorage : IRecipesStorage
     {
+        private const string fileName = "D:\\Recipes.dat";
         private List<Recipe> recipes = new List<Recipe>();
-        private BinaryFormatter formatter = new BinaryFormatter();
+        private BinaryFormatter formatter = new BinaryFormatter(); 
         public Recipe Load(int Id)
         {
             LoadAll();
@@ -24,12 +25,12 @@ namespace Inventory.RecipesStorage
      
         public List<Recipe> LoadAll()
         {
-            if (File.Exists("D:\\Recipes.dat"))
+            if (File.Exists(fileName))
             {
-                string[] stroki = File.ReadAllLines("D:\\Recipes.dat");
+                string[] stroki = File.ReadAllLines(fileName);
                 if (stroki.Length > 0)
                 {
-                    using (FileStream fs = new FileStream("D:\\Recipes.dat", FileMode.OpenOrCreate))
+                    using (FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate))
                     {
                         recipes = (List<Recipe>)formatter.Deserialize(fs);
                     }
@@ -51,7 +52,7 @@ namespace Inventory.RecipesStorage
             LoadAll();
             recipe.Id = recipes.Count + 1;
             recipes.Add(recipe);
-            using (FileStream fs = new FileStream("D:\\Recipes.dat", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate))
             {
                 fs.SetLength(0);
                 formatter.Serialize(fs, recipes);

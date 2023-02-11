@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Inventory.DesktopClient.Windows"
         mc:Ignorable="d"
-        Title="AddRecipeWindow" Height="450" Width="800">
+        Title="Добавить рецепт" Height="450" Width="800">
     <Grid>
-        
+        <StackPanel>
+            <Canvas x:Name="_craftingTable"/>
+        </StackPanel>
     </Grid>
 </Window>

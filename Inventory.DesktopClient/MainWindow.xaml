@@ -21,15 +21,15 @@
                 <MenuItem Header="Выдать предмет" FontSize="20">
                     <MenuItem Header="Доски"/>
                     <MenuItem Header="Палка"/>
-                </MenuItem>
-                <MenuItem Header="Выйти" FontSize="20"/>
+                </MenuItem> 
+                <MenuItem Header="Выйти" FontSize="20" Click="_exit"/>
             </Menu>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="1">
-            <Canvas x:Name="_inventory" Grid.Column="0"/>
+            <Canvas x:Name="_inventory" Grid.Column="0" MouseLeftButtonDown="_takePutOne" MouseRightButtonDown="_takePutGroup"/>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="1">
-            <Canvas x:Name="_craftingTable" Grid.Column="1"/>
+            <Canvas x:Name="_craftingTable" Grid.Column="1" MouseLeftButtonDown="_craftTakePutOne" MouseRightButtonDown="_craftTakePutGroup"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Inventory.RecipesStorage;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,7 @@ namespace Inventory.DesktopClient.Windows
     /// </summary>
     public partial class AddRecipeWindow : Window
     {
+        public IRecipesStorage recipesStorage = new TempRecipesStorage();
         public AddRecipeWindow()
         {
             InitializeComponent();

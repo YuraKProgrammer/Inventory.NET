@@ -1,4 +1,5 @@
 ﻿using Inventory.Models;
+using Inventory.Models.Managers;
 using Inventory.RecipesStorage;
 using System;
 using System.Collections.Generic;
@@ -40,12 +41,12 @@ namespace Inventory.DesktopClient
         }
 
         public void DrawInventory()
-        { 
-            for (var x=0; x<game.Inventory.xSize; x++)
+        {
+            for (var x = 0; x < game.Inventory.xSize; x++)
             {
-                for (var y=0; y<game.Inventory.ySize; y++)
+                for (var y = 0; y < game.Inventory.ySize; y++)
                 {
-                    DrawInventoryCell(x,y);
+                    DrawInventoryCell(x, y);
                 }
             }
         }
@@ -54,7 +55,7 @@ namespace Inventory.DesktopClient
         {
             var bitmapImage = new BitmapImage();
             var cl = game.Inventory.cells[x, y];
-            if (cl == null || cl.ItemsGroup.Count==0 || cl.ItemsGroup.Item == null)
+            if (!CellVoidChecker.CheckCellIsNotEmpty(cl))
             {
                 bitmapImage = new BitmapImage(new Uri(@"/Inventory.DesktopClient;component/images/empty.png", UriKind.RelativeOrAbsolute));
             }
@@ -87,7 +88,7 @@ namespace Inventory.DesktopClient
         {
             var bitmapImage = new BitmapImage();
             var ig = game.CraftingTable.Ingredients[x, y];
-            if (ig == null || ig.ItemsGroup.Count == 0 || ig.ItemsGroup.Item == null)
+            if (!CellVoidChecker.CheckCellIsNotEmpty(ig))
             {
                 bitmapImage = new BitmapImage(new Uri(@"/Inventory.DesktopClient;component/images/empty.png", UriKind.RelativeOrAbsolute));
             }
@@ -106,19 +107,74 @@ namespace Inventory.DesktopClient
 
         public void DrawCraftingTableResult()
         {
-            /*
-            if (game.CraftingTable.cells[x, y] == null || game.Inventory.cells[x, y].ItemsGroup.Count == 0 || game.Inventory.cells[x, y].ItemsGroup.Item == null)
+            var bitmapImage = new BitmapImage();
+            var rs = game.CraftingTable.Result;
+            if (!CellVoidChecker.CheckCellIsNotEmpty(rs))
             {
                 bitmapImage = new BitmapImage(new Uri(@"/Inventory.DesktopClient;component/images/empty.png", UriKind.RelativeOrAbsolute));
             }
             else
             {
-                bitmapImage = new BitmapImage(new Uri(game.Inventory.cells[x, y].ItemsGroup.Item.Image, UriKind.RelativeOrAbsolute));
+                bitmapImage = new BitmapImage(new Uri(rs.ItemsGroup.Item.Image, UriKind.RelativeOrAbsolute));
             }
-            */
+            System.Windows.Controls.Image image = new System.Windows.Controls.Image();
+            image.Width = CellSize;
+            image.Height = CellSize;
+            image.Source = bitmapImage;
+            Canvas.SetLeft(image, CellSize * 3);
+            Canvas.SetTop(image, CellSize * 1);
+            _craftingTable.Children.Add(image);
         }
 
         public void DrawTakenItemsGroup()
+        {
+            var tig = game.TakenItemsGroup;
+            if (CellVoidChecker.CheckItemsGroupIsNotEmpty(tig))
+            {
+                var x = (int)(Mouse.GetPosition(_inventory).X);
+                var y = (int)(Mouse.GetPosition(_inventory).Y);
+                var bitmapImage = new BitmapImage(new Uri(tig.Item.Image, UriKind.RelativeOrAbsolute));
+                System.Windows.Controls.Image image = new System.Windows.Controls.Image();
+                image.Width = CellSize;
+                image.Height = CellSize;
+                image.Source = bitmapImage;
+                Canvas.SetLeft(image, CellSize * x);
+                Canvas.SetTop(image, CellSize * y);
+                _craftingTable.Children.Add(image);
+            }
+        }
+
+        public void _exit(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        public void _takePutOne(object sender, MouseButtonEventArgs e)
+        {
+            var x = (int)(e.GetPosition(_inventory).X / CellSize);
+            var y = (int)(e.GetPosition(_inventory).Y / CellSize);
+            var tig = game.TakenItemsGroup;
+            if (CellVoidChecker.CheckItemsGroupIsNotEmpty(tig))
+            {
+                game.TakeOneItem(x, y);
+            }
+            else
+            {
+                game.PutOneItem(x, y);
+            }
+        }
+
+        public void _takePutGroup(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        public void _craftTakePutOne(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        public void _craftTakePutGroup(object sender, MouseButtonEventArgs e)
         {
 
         }
