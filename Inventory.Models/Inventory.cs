@@ -1,5 +1,6 @@
 ﻿
 using Inventory.Models.Items;
+using Inventory.Models.Managers;
 
 namespace Inventory.Models
 {
@@ -27,9 +28,25 @@ namespace Inventory.Models
             cells[x, y].ItemsGroup.Count--;
         }
 
-        public void AddItems(int x, int y, ItemsGroup ig)
+        public bool AddItems(int x, int y, ItemsGroup ig)
         {
-            cells[x, y] = new Cell(ig);
+            if (CellVoidChecker.CheckCellIsNotEmpty(cells[x, y]))
+            {
+                cells[x, y] = new Cell(ig);
+                return true;
+            }
+            else
+            {
+                if (cells[x, y].ItemsGroup.Item == ig.Item)
+                {
+                    cells[x, y].ItemsGroup.Count = cells[x, y].ItemsGroup.Count + ig.Count;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
 
         public ItemsGroup RemoveItems(int x, int y)

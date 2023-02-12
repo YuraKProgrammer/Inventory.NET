@@ -166,7 +166,17 @@ namespace Inventory.DesktopClient
 
         public void _takePutGroup(object sender, MouseButtonEventArgs e)
         {
-
+            var x = (int)(e.GetPosition(_inventory).X / CellSize);
+            var y = (int)(e.GetPosition(_inventory).Y / CellSize);
+            var tig = game.TakenItemsGroup;
+            if (CellVoidChecker.CheckItemsGroupIsNotEmpty(tig))
+            {
+                game.TakeItemsGroup(x, y);
+            }
+            else
+            {
+                game.PutOneItem(x, y);
+            }
         }
 
         public void _craftTakePutOne(object sender, MouseButtonEventArgs e)

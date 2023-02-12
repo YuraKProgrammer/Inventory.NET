@@ -32,12 +32,45 @@ namespace Inventory.Models
         {
             if (CellVoidChecker.CheckCellIsNotEmpty(Inventory.cells[x, y]))
             {
-                Inventory.Add1Item(x, y);
+                if (Inventory.cells[x, y].ItemsGroup.Item == TakenItemsGroup.Item)
+                {
+                    Inventory.Add1Item(x, y);
+                    TakenItemsGroup.Count--;
+                }
             }
             else
             {
                 Inventory.cells[x,y]=new Cell(new ItemsGroup(TakenItemsGroup.Item,1));
                 TakenItemsGroup.Count--;
+            }
+        }
+
+        public void TakeItemsGroup(int x, int y)
+        {
+            if (CellVoidChecker.CheckCellIsNotEmpty(Inventory.cells[x, y]))
+            {
+                var i = Inventory.cells[x, y].ItemsGroup;
+                Inventory.RemoveItems(x, y);
+                TakenItemsGroup = i;
+            }
+        }
+
+        public void PutItemsGroup(int x, int y)
+        {
+            if (CellVoidChecker.CheckCellIsNotEmpty(Inventory.cells[x, y]))
+            {
+                var b = Inventory.AddItems(x, y, TakenItemsGroup);
+                if (b == true)
+                {
+                    TakenItemsGroup.Item=null;
+                    TakenItemsGroup.Count=0;
+                }
+            }
+            else
+            {
+                Inventory.cells[x, y] = new Cell(TakenItemsGroup);
+                TakenItemsGroup.Item = null;
+                TakenItemsGroup.Count = 0;
             }
         }
     }
