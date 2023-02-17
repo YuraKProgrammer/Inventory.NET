@@ -1,6 +1,4 @@
-﻿
-using Inventory.Models.Items;
-using Inventory.Models.Managers;
+﻿using Inventory.Models.Items;
 
 namespace Inventory.Models
 {

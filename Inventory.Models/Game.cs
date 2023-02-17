@@ -73,5 +73,10 @@ namespace Inventory.Models
                 TakenItemsGroup.Count = 0;
             }
         }
+
+        public void GiveItem(IItem item) 
+        {
+            Inventory=giverManager.GiveItem(Inventory, item);
+        }
     }
 }

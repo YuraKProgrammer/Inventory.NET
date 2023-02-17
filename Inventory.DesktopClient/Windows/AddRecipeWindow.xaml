@@ -7,8 +7,16 @@
         mc:Ignorable="d"
         Title="Добавить рецепт" Height="450" Width="800">
     <Grid>
-        <StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
             <Canvas x:Name="_craftingTable"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <Button Content="Добавить"/>
+            <Button Content="Отмена"/>
         </StackPanel>
     </Grid>
 </Window>

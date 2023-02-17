@@ -1,5 +1,5 @@
 ﻿using Inventory.Models;
-using Inventory.Models.Managers;
+using Inventory.Models.Items;
 using Inventory.RecipesStorage;
 using System;
 using System.Collections.Generic;
@@ -188,6 +188,20 @@ namespace Inventory.DesktopClient
         {
 
         }
+
+        public void _givePlanks(object sender, RoutedEventArgs e)
+        {
+            game.GiveItem(new Planks());
+            Update();
+        }
+
+        public void _giveStick(object sender, RoutedEventArgs e)
+        {
+            game.GiveItem(new Stick());
+            Update();
+        }
+
+
     }
 }
 
