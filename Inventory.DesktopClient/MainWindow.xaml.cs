@@ -70,6 +70,16 @@ namespace Inventory.DesktopClient
             Canvas.SetLeft(image, CellSize * x);
             Canvas.SetTop(image, CellSize * y);
             _inventory.Children.Add(image);
+            TextBlock textBlock = new TextBlock();
+            textBlock.FontSize = 12;
+            if (CellVoidChecker.CheckCellIsNotEmpty(cl))
+            {
+                textBlock.Text = (cl.ItemsGroup.Count).ToString();
+            }
+            Canvas.SetLeft(textBlock, CellSize*x + 0.8*CellSize);
+            Canvas.SetTop(textBlock, CellSize*y + 0.8*CellSize);
+            _inventory.Children.Add(textBlock);
+
         }
 
         public void DrawCraftingTable()
@@ -162,6 +172,7 @@ namespace Inventory.DesktopClient
             {
                 game.PutOneItem(x, y);
             }
+            Update();
         }
 
         public void _takePutGroup(object sender, MouseButtonEventArgs e)
@@ -177,6 +188,7 @@ namespace Inventory.DesktopClient
             {
                 game.PutOneItem(x, y);
             }
+            Update();
         }
 
         public void _craftTakePutOne(object sender, MouseButtonEventArgs e)

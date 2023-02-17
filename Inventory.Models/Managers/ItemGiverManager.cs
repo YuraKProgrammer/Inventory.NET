@@ -9,7 +9,7 @@ namespace Inventory.Models.Managers
 {
     public class ItemGiverManager
     {
-        public Inventory GiveItem(Inventory inv, IItem item)
+        public Inventory GiveItem(Inventory inv, IItem item, int maxStackSize)
         {
             for (var y=0; y<inv.ySize; y++)
             {
@@ -22,7 +22,7 @@ namespace Inventory.Models.Managers
                     }
                     else
                     {
-                        if (inv.cells[x, y].ItemsGroup.Item == item)
+                        if (Comparer.CompareItems(inv.cells[x, y].ItemsGroup.Item,item) && inv.cells[x,y].ItemsGroup.Count+1<=maxStackSize)
                         {
                             inv.Add1Item(x, y);
                             return inv;

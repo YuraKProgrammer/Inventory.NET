@@ -76,7 +76,7 @@ namespace Inventory.Models
 
         public void GiveItem(IItem item) 
         {
-            Inventory=giverManager.GiveItem(Inventory, item);
+            Inventory=giverManager.GiveItem(Inventory, item, maxStackSize);
         }
     }
 }
