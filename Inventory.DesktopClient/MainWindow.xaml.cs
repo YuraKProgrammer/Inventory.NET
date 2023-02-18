@@ -35,11 +35,13 @@ namespace Inventory.DesktopClient
 
         public void Update()
         {
+            game.Craft();
             DrawInventory();
             DrawTakenItemsGroup();
             DrawCraftingTable();
         }
 
+        #region Drawers
         public void DrawInventory()
         {
             for (var x = 0; x < game.Inventory.xSize; x++)
@@ -153,18 +155,20 @@ namespace Inventory.DesktopClient
                 _craftingTable.Children.Add(image);
             }
         }
+        #endregion
 
         public void _exit(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        #region TakePut
         public void _takePutOne(object sender, MouseButtonEventArgs e)
         {
             var x = (int)(e.GetPosition(_inventory).X / CellSize);
             var y = (int)(e.GetPosition(_inventory).Y / CellSize);
             var tig = game.TakenItemsGroup;
-            if (CellVoidChecker.CheckItemsGroupIsNotEmpty(tig))
+            if (!CellVoidChecker.CheckItemsGroupIsNotEmpty(tig))
             {
                 game.TakeOneItem(x, y);
             }
@@ -180,13 +184,13 @@ namespace Inventory.DesktopClient
             var x = (int)(e.GetPosition(_inventory).X / CellSize);
             var y = (int)(e.GetPosition(_inventory).Y / CellSize);
             var tig = game.TakenItemsGroup;
-            if (CellVoidChecker.CheckItemsGroupIsNotEmpty(tig))
+            if (!CellVoidChecker.CheckItemsGroupIsNotEmpty(tig))
             {
                 game.TakeItemsGroup(x, y);
             }
             else
             {
-                game.PutOneItem(x, y);
+                game.PutItemsGroup(x, y);
             }
             Update();
         }
@@ -200,7 +204,8 @@ namespace Inventory.DesktopClient
         {
 
         }
-
+        #endregion
+        #region GiveButtons
         public void _givePlanks(object sender, RoutedEventArgs e)
         {
             game.GiveItem(new Planks());
@@ -213,7 +218,19 @@ namespace Inventory.DesktopClient
             Update();
         }
 
+        public void _giveWoodSword(object sender, RoutedEventArgs e)
+        {
+            game.GiveItem(new WoodSword());
+            Update();
+        }
 
+        public void _giveIronIngot(object sender, RoutedEventArgs e)
+        {
+            game.GiveItem(new IronIngot());
+            Update();
+        }
+
+        #endregion
     }
 }
 

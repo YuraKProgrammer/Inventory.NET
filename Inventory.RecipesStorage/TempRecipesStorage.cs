@@ -16,11 +16,11 @@ namespace Inventory.RecipesStorage
         public Recipe Load(int Id)
         {
             LoadAll();
-            var rc = recipes
+            var rec = recipes
                 .Where(rc => rc.Id==Id)
                 .ToList()
                 .FirstOrDefault();
-            return rc;
+            return rec;
         }
      
         public List<Recipe> LoadAll()

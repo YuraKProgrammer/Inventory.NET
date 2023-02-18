@@ -78,5 +78,10 @@ namespace Inventory.Models
         {
             Inventory=giverManager.GiveItem(Inventory, item, maxStackSize);
         }
+
+        public void Craft()
+        {
+            CraftingTable = craftingTableManager.CheckCraft(CraftingTable, recipes);
+        }
     }
 }

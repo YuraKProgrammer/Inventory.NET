@@ -11,5 +11,11 @@ namespace Inventory.Models
         public int Id { get; set; }
         public Cell[,] Ingredients = new Cell[3, 3];
         public Cell Result = new Cell(new Items.ItemsGroup(null, 0));
+
+        public Recipe(Cell[,] ingredients, Cell result)
+        {
+            Ingredients = ingredients;
+            Result = result;
+        }
     }
 }
