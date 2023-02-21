@@ -28,11 +28,24 @@ namespace Inventory.Models
             }
         }
 
+        public void TakeOneItemCT(int x, int y)
+        {
+            if (x < 3)
+            {
+                if (CellVoidChecker.CheckCellIsNotEmpty(Inventory.cells[x - 9, y]))
+                {
+                    var i = CraftingTable.Ingredients[x - 9, y].ItemsGroup.Item;
+                    CraftingTable.Ingredients[x - 9, y].ItemsGroup.Count--;
+                    TakenItemsGroup = new ItemsGroup(i, 1);
+                }
+            }
+        }
+
         public void PutOneItem(int x, int y)
         {
             if (CellVoidChecker.CheckCellIsNotEmpty(Inventory.cells[x, y]))
             {
-                if (Inventory.cells[x, y].ItemsGroup.Item == TakenItemsGroup.Item)
+                if (Comparer.CompareItems(Inventory.cells[x, y].ItemsGroup.Item,TakenItemsGroup.Item))
                 {
                     Inventory.Add1Item(x, y);
                     TakenItemsGroup.Count--;
@@ -42,6 +55,26 @@ namespace Inventory.Models
             {
                 Inventory.cells[x,y]=new Cell(new ItemsGroup(TakenItemsGroup.Item,1));
                 TakenItemsGroup.Count--;
+            }
+        }
+
+        public void PutOneItemCT(int x, int y)
+        {
+            if (x < 3)
+            {
+                if (CellVoidChecker.CheckCellIsNotEmpty(CraftingTable.Ingredients[x - 9, y]))
+                {
+                    if (Comparer.CompareItems(CraftingTable.Ingredients[x - 9, y].ItemsGroup.Item, TakenItemsGroup.Item))
+                    {
+                        CraftingTable.Ingredients[x - 9, y].ItemsGroup.Count--;
+                        TakenItemsGroup.Count--;
+                    }
+                }
+                else
+                {
+                    CraftingTable.Ingredients[x - 9, y] = new Cell(new ItemsGroup(TakenItemsGroup.Item, 1));
+                    TakenItemsGroup.Count--;
+                }
             }
         }
 

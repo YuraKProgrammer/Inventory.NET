@@ -8,14 +8,14 @@
         Title="Инвентарь" Height="800" Width="1600">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto" MinWidth="905"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Column="0" Grid.Row="0">
+        <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <Menu Grid.Column="0">
                 <MenuItem Header="Редактор рецептов" FontSize="20"/>
                 <MenuItem Header="Выдать предмет" FontSize="20">
@@ -23,14 +23,15 @@
                     <MenuItem Header="Палка" Click="_giveStick"/>
                     <MenuItem Header="Деревянный меч" Click="_giveWoodSword"/>
                     <MenuItem Header="Железный слиток" Click="_giveIronIngot"/>
-                </MenuItem> 
+                    <MenuItem Header="Алмаз" Click="_giveDiamond"/>
+                </MenuItem>
                 <MenuItem Header="Выйти" FontSize="20" Click="_exit"/>
             </Menu>
         </StackPanel>
-        <StackPanel Grid.Column="0" Grid.Row="1">
+        <StackPanel Grid.Column="0" Margin="25" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <Canvas x:Name="_inventory" Grid.Column="0" MouseLeftButtonDown="_takePutOne" MouseRightButtonDown="_takePutGroup"/>
         </StackPanel>
-        <StackPanel Grid.Column="1" Grid.Row="1">
+        <StackPanel Grid.Column="1" Margin="25" Grid.RowSpan="2">
             <Canvas x:Name="_craftingTable" Grid.Column="1" MouseLeftButtonDown="_craftTakePutOne" MouseRightButtonDown="_craftTakePutGroup"/>
         </StackPanel>
     </Grid>

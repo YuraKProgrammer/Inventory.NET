@@ -90,7 +90,7 @@ namespace Inventory.DesktopClient
             {
                 for (var y = 0; y < 3; y++)
                 {
-                    DrawInventoryCell(x, y);
+                    DrawCraftingTableCell(x, y);
                 }
             }
             DrawCraftingTableResult();
@@ -115,6 +115,15 @@ namespace Inventory.DesktopClient
             Canvas.SetLeft(image, CellSize * x);
             Canvas.SetTop(image, CellSize * y);
             _craftingTable.Children.Add(image);
+            TextBlock textBlock = new TextBlock();
+            textBlock.FontSize = 12;
+            if (CellVoidChecker.CheckCellIsNotEmpty(ig))
+            {
+                textBlock.Text = (ig.ItemsGroup.Count).ToString();
+            }
+            Canvas.SetLeft(textBlock, CellSize * x + 0.8 * CellSize);
+            Canvas.SetTop(textBlock, CellSize * y + 0.8 * CellSize);
+            _craftingTable.Children.Add(textBlock);
         }
 
         public void DrawCraftingTableResult()
@@ -197,7 +206,18 @@ namespace Inventory.DesktopClient
 
         public void _craftTakePutOne(object sender, MouseButtonEventArgs e)
         {
-
+            var x = (int)(e.GetPosition(_inventory).X / CellSize);
+            var y = (int)(e.GetPosition(_inventory).Y / CellSize);
+            var tig = game.TakenItemsGroup;
+            if (!CellVoidChecker.CheckItemsGroupIsNotEmpty(tig))
+            {
+                game.TakeOneItemCT(x, y);
+            }
+            else
+            {
+                game.PutOneItemCT(x, y);
+            }
+            Update();
         }
 
         public void _craftTakePutGroup(object sender, MouseButtonEventArgs e)
@@ -227,6 +247,12 @@ namespace Inventory.DesktopClient
         public void _giveIronIngot(object sender, RoutedEventArgs e)
         {
             game.GiveItem(new IronIngot());
+            Update();
+        }
+
+        public void _giveDiamond(object sender, RoutedEventArgs e)
+        {
+            game.GiveItem(new Diamond());
             Update();
         }
 
