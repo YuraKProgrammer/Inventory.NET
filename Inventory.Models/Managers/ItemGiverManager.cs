@@ -32,5 +32,29 @@ namespace Inventory.Models.Managers
             }    
             return inv;
         }
+
+        public CraftingTable GiveItemCT(CraftingTable ct, IItem item, int maxStackSize)
+        {
+            for (var y = 0; y < 3; y++)
+            {
+                for (var x = 0; x < 3; x++)
+                {
+                    if (!CellVoidChecker.CheckCellIsNotEmpty(ct.Ingredients[x, y]))
+                    {
+                        ct.Ingredients[x, y] = new Cell(new ItemsGroup(item, 1));
+                        return ct;
+                    }
+                    else
+                    {
+                        if (Comparer.CompareItems(ct.Ingredients[x, y].ItemsGroup.Item, item) && ct.Ingredients[x, y].ItemsGroup.Count + 1 <= maxStackSize)
+                        {
+                            ct.Ingredients[x, y].ItemsGroup.Count++;
+                            return ct;
+                        }
+                    }
+                }
+            }
+            return ct;
+        }
     }
 }

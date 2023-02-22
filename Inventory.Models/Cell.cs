@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Inventory.Models
 {
+    [Serializable]
     public class Cell
     {
         public ItemsGroup ItemsGroup { get; set; }

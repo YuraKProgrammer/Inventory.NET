@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Inventory.Models.Items
 {
+    [Serializable]
     public class Diamond : IItem
     {
         public string Image { get; }

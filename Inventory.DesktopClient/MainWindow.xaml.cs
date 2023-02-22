@@ -1,4 +1,5 @@
-﻿using Inventory.Models;
+﻿using Inventory.DesktopClient.Windows;
+using Inventory.Models;
 using Inventory.Models.Items;
 using Inventory.RecipesStorage;
 using System;
@@ -206,8 +207,8 @@ namespace Inventory.DesktopClient
 
         public void _craftTakePutOne(object sender, MouseButtonEventArgs e)
         {
-            var x = (int)(e.GetPosition(_inventory).X / CellSize);
-            var y = (int)(e.GetPosition(_inventory).Y / CellSize);
+            var x = (int)(e.GetPosition(_craftingTable).X / CellSize);
+            var y = (int)(e.GetPosition(_craftingTable).Y / CellSize);
             var tig = game.TakenItemsGroup;
             if (!CellVoidChecker.CheckItemsGroupIsNotEmpty(tig))
             {
@@ -217,6 +218,7 @@ namespace Inventory.DesktopClient
             {
                 game.PutOneItemCT(x, y);
             }
+            game.recipes = recipesStorage.LoadAll();
             Update();
         }
 
@@ -257,6 +259,12 @@ namespace Inventory.DesktopClient
         }
 
         #endregion
+
+        public void addRecipeWindow(object sender, RoutedEventArgs e)
+        {
+            var window = new AddRecipeWindow();
+            window.Show();
+        }
     }
 }
 

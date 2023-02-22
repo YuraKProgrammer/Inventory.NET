@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <Menu Grid.Column="0">
-                <MenuItem Header="Редактор рецептов" FontSize="20"/>
+                <MenuItem Header="Редактор рецептов" FontSize="20" Click="addRecipeWindow"/>
                 <MenuItem Header="Выдать предмет" FontSize="20">
                     <MenuItem Header="Доски" Click="_givePlanks"/>
                     <MenuItem Header="Палка" Click="_giveStick"/>

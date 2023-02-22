@@ -26,6 +26,14 @@ namespace Inventory.Models
 
         public static bool CompareItemsGroups(ItemsGroup ig1, ItemsGroup ig2)
         {
+            if (ig1==null && ig2 == null)
+            {
+                return true;
+            }
+            if ((ig1==null && ig2!=null) || (ig1 != null && ig2 == null))
+            {
+                return false;
+            }
             if (CompareItems(ig1.Item,ig2.Item) && ig1.Count == ig2.Count)
             {
                 return true;

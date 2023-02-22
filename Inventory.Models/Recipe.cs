@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Inventory.Models
 {
+    [Serializable]
     public class Recipe
     {
         public int Id { get; set; }

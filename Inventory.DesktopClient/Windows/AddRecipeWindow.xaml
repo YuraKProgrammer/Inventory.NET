@@ -8,14 +8,27 @@
         Title="Добавить рецепт" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0">
-            <Canvas x:Name="_craftingTable"/>
+            <Menu>
+                <MenuItem Header="Добавить предмет">
+                    <MenuItem Header="Доски" Click="_givePlanks"/>
+                    <MenuItem Header="Палка" Click="_giveStick"/>
+                    <MenuItem Header="Деревянный меч" Click="_giveWoodSword"/>
+                    <MenuItem Header="Железный слиток" Click="_giveIronIngot"/>
+                    <MenuItem Header="Алмаз" Click="_giveDiamond"/>
+                </MenuItem>
+                <MenuItem Header="Удалить предмет"/>
+            </Menu>
         </StackPanel>
         <StackPanel Grid.Row="1">
-            <Button Content="Добавить"/>
+            <Canvas x:Name="_craftingTable" MouseLeftButtonDown="_craftTakePutOne"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2">
+            <Button Content="Добавить" Click="AddRecipe"/>
             <Button Content="Отмена"/>
         </StackPanel>
     </Grid>
