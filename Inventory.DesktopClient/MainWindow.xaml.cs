@@ -146,6 +146,15 @@ namespace Inventory.DesktopClient
             Canvas.SetLeft(image, CellSize * 3);
             Canvas.SetTop(image, CellSize * 1);
             _craftingTable.Children.Add(image);
+            TextBlock textBlock = new TextBlock();
+            textBlock.FontSize = 12;
+            if (CellVoidChecker.CheckCellIsNotEmpty(rs))
+            {
+                textBlock.Text = (rs.ItemsGroup.Count).ToString();
+            }
+            Canvas.SetLeft(textBlock, CellSize * 3 + 0.8 * CellSize);
+            Canvas.SetTop(textBlock, CellSize * 1 + 0.8 * CellSize);
+            _craftingTable.Children.Add(textBlock);
         }
 
         public void DrawTakenItemsGroup()
@@ -255,6 +264,12 @@ namespace Inventory.DesktopClient
         public void _giveDiamond(object sender, RoutedEventArgs e)
         {
             game.GiveItem(new Diamond());
+            Update();
+        }
+
+        public void _giveDiamondPickaxe(object sender, RoutedEventArgs e)
+        {
+            game.GiveItem(new DiamondPickaxe());
             Update();
         }
 

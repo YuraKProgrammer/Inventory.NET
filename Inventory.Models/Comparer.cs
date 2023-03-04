@@ -15,6 +15,14 @@ namespace Inventory.Models
             {
                 for (int y = 0; y < 3; y++)
                 {
+                    if (i1[x,y]==null)
+                    {
+                        i1[x, y] = new Cell(new ItemsGroup(null,0));
+                    }
+                    if (i2[x, y] == null)
+                    {
+                        i2[x, y] = new Cell(new ItemsGroup(null, 0));
+                    }
                     if (!CompareItemsGroups(i1[x, y].ItemsGroup, i2[x, y].ItemsGroup))
                     {
                         return false;
@@ -46,6 +54,18 @@ namespace Inventory.Models
 
         public static bool CompareItems(IItem it1, IItem it2)
         {
+            if (it1 == null && it2 == null)
+            {
+                return true;
+            }
+            if (it1 == null && it2 != null)
+            {
+                return false;
+            }
+            if (it1 != null && it2 == null)
+            {
+                return false;
+            }
             if (it1.Image == it2.Image)
             {
                 return true;

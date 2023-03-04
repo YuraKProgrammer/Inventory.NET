@@ -14,6 +14,13 @@ namespace Inventory.Models
             this.xSize = xSize;
             this.ySize = ySize;
             cells = new Cell[xSize, ySize];
+            for (var x=0; x<xSize; x++)
+            {
+                for (var y=0; y<ySize; y++)
+                {
+                    cells[x, y] = new Cell(new ItemsGroup(null, 0));
+                }
+            }
         }
 
         public void Add1Item(int x, int y)

@@ -33,6 +33,7 @@ namespace Inventory.DesktopClient.Windows
         public AddRecipeWindow()
         {
             InitializeComponent();
+            DrawCraftingTable();
         }
 
         public void _craftTakePutOne(object sender, MouseButtonEventArgs e)
@@ -189,6 +190,12 @@ namespace Inventory.DesktopClient.Windows
         public void _giveDiamond(object sender, RoutedEventArgs e)
         {
             GiveItem(new Diamond());
+            DrawCraftingTable();
+        }
+
+        public void _giveDiamondPickaxe(object sender, RoutedEventArgs e)
+        {
+            GiveItem(new DiamondPickaxe());
             DrawCraftingTable();
         }
 

@@ -20,6 +20,7 @@
                     <MenuItem Header="Деревянный меч" Click="_giveWoodSword"/>
                     <MenuItem Header="Железный слиток" Click="_giveIronIngot"/>
                     <MenuItem Header="Алмаз" Click="_giveDiamond"/>
+                    <MenuItem Header="Алмазная кирка" Click="_giveDiamondPickaxe"/>
                 </MenuItem>
                 <MenuItem Header="Удалить предмет"/>
             </Menu>

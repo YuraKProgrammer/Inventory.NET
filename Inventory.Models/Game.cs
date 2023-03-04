@@ -39,6 +39,15 @@ namespace Inventory.Models
                     TakenItemsGroup = new ItemsGroup(i, 1);
                 }
             }
+            else
+            {
+                if (CellVoidChecker.CheckCellIsNotEmpty(CraftingTable.Result))
+                {
+                    var i = CraftingTable.Result.ItemsGroup.Item;
+                    CraftingTable.Result.ItemsGroup.Count--;
+                    TakenItemsGroup = new ItemsGroup(i, 1);
+                }
+            }
         }
 
         public void PutOneItem(int x, int y)
